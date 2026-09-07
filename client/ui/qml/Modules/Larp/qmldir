@@ -1,0 +1,3 @@
+module Larp
+singleton LarpProfile 1.0 LarpProfile.qml
+ProfileStore 1.0 ProfileStore.qml

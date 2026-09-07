@@ -4,6 +4,7 @@ import QtQuick.Layouts
 
 import PageEnum 1.0
 import Style 1.0
+import Larp 1.0
 
 import "./"
 import "../Controls2"
@@ -54,6 +55,25 @@ PageType {
         delegate: ColumnLayout { // TODO(CyAn84): add DelegateChooser when have migrated to 6.9
 
             width: listView.width
+
+            TextFieldWithHeaderType {
+                id: profileName
+                Layout.fillWidth: true
+                Layout.margins: 16
+                headerText: "Имя пользователя"
+                subtitleText: "Подпись на главном экране"
+                placeholderText: "вконтакте.ком"
+                textField.text: LarpProfile.displayName
+                textField.maximumLength: 64
+                textField.Accessible.name: "Имя пользователя"
+                textField.onEditingFinished: {
+                    LarpProfile.saveName(textField.text)
+                    textField.text = LarpProfile.displayName
+                }
+                Component.onDestruction: LarpProfile.saveName(textField.text)
+            }
+
+            DividerType {}
 
             SwitcherType {
                 id: switcherAllowScreenshots
@@ -194,6 +214,7 @@ PageType {
 
             SwitcherType {
                 id: switcherAutoUpdateCheck
+                visible: Qt.application.name !== "LarpmneziaVPN"
 
                 Layout.fillWidth: true
                 Layout.margins: 16
@@ -270,6 +291,7 @@ PageType {
                             PageController.showNotificationMessage(qsTr("Cannot reset settings during active connection"))
                         } else
                         {
+                            LarpProfile.saveName("")
                             SettingsController.clearSettings()
                             PageController.goToPageHome()
                         }

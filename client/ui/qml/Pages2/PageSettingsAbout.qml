@@ -146,6 +146,7 @@ PageType {
 
             BasicButtonType {
                 id: checkUpdatesButton
+                visible: Qt.application.name !== "LarpmneziaVPN"
 
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 8

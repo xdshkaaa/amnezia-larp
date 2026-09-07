@@ -86,8 +86,13 @@ if(WIN32)
 endif()
 
 if (APPLE AND NOT IOS AND NOT MACOS_NE)
-    install(FILES ${CMAKE_SOURCE_DIR}/deploy/data/macos/AmneziaVPN.plist
-        DESTINATION "AmneziaVPN.app/Contents/Resources"
+    if(LARP_BRANDING)
+        set(_service_plist ${CMAKE_SOURCE_DIR}/deploy/larp/org.larp.LarpmneziaVPN.plist)
+    else()
+        set(_service_plist ${CMAKE_SOURCE_DIR}/deploy/data/macos/AmneziaVPN.plist)
+    endif()
+    install(FILES ${_service_plist}
+        DESTINATION "${CLIENT_TARGET_NAME}.app/Contents/Resources"
         COMPONENT AmneziaVPN
     )
 endif()

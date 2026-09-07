@@ -21,14 +21,28 @@ PageType {
         anchors.fill: parent
         spacing: 0
 
-        Image {
-            id: image
-            source: "qrc:/images/amneziaBigLogo.png"
-
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.topMargin: 32 + PageController.safeAreaTopMargin
-            Layout.preferredWidth: 360
-            Layout.preferredHeight: 287
+        Item {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Column {
+                anchors.centerIn: parent
+                spacing: 12
+                Text {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: "LARP"
+                    color: "#F13755"
+                    font.family: "PT Root UI VF"
+                    font.pixelSize: 66
+                    font.weight: Font.Black
+                }
+                Text {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: Qt.application.displayName
+                    color: AmneziaStyle.color.paleGray
+                    font.family: "PT Root UI VF"
+                    font.pixelSize: 18
+                }
+            }
         }
 
         BasicButtonType {

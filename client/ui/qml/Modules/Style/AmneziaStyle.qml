@@ -11,7 +11,7 @@ QtObject {
         readonly property color charcoalGray: '#494B50'
         readonly property color slateGray: '#2C2D30'
         readonly property color onyxBlack: '#1C1D21'
-        readonly property color midnightBlack: '#0E0E11'
+        readonly property color midnightBlack: '#1E1E1E'
         readonly property color goldenApricot: goldenApricotString
         readonly property color benefitsPanelBackground: '#1C1C1E'
         readonly property color softViolet: '#A87BE2'

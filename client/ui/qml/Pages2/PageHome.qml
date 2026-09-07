@@ -161,6 +161,7 @@ PageType {
                 objectName: "connectButton"
 
                 Layout.fillHeight: true
+                Layout.fillWidth: true
                 Layout.alignment: Qt.AlignCenter
             }
 
