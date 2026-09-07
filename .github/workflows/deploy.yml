@@ -1,6 +1,7 @@
 name: 'Deploy workflow'
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - '**'
@@ -1002,4 +1003,3 @@ jobs:
         run: | 
           echo "Pull request:" >> $GITHUB_STEP_SUMMARY
           echo "[[#${{ fromJSON(steps.pull_request.outputs.data)[0].number }}] ${{ fromJSON(steps.pull_request.outputs.data)[0].title }}](${{ fromJSON(steps.pull_request.outputs.data)[0].html_url }})" >> $GITHUB_STEP_SUMMARY
-
