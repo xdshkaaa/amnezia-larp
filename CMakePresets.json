@@ -1,0 +1,22 @@
+{
+  "version": 6,
+  "configurePresets": [{
+    "name": "larp-macos",
+    "displayName": "LarpmneziaVPN macOS test build",
+    "generator": "Ninja",
+    "binaryDir": "${sourceDir}/build-larp",
+    "cacheVariables": {
+      "CMAKE_BUILD_TYPE": "Release",
+      "CMAKE_PREFIX_PATH": "${sourceDir}/.tools/Qt/6.10.1/macos",
+      "CONAN_COMMAND": "${sourceDir}/.tools/conan/bin/conan",
+      "LARP_BRANDING": "ON",
+      "CLIENT_TARGET_NAME": "LarpmneziaVPN",
+      "CLIENT_APPLICATION_NAME": "LarpmneziaVPN",
+      "CLIENT_SERVICE_NAME": "LarpmneziaVPN-service",
+      "CLIENT_ORGANIZATION_NAME": "LarpmneziaVPN",
+      "CLIENT_APP_INSTANCE_NAME": "LarpmneziaVPNInstance",
+      "BUILD_OSX_APP_IDENTIFIER": "org.larp.LarpmneziaVPN"
+    }
+  }],
+  "buildPresets": [{"name": "larp-macos", "configurePreset": "larp-macos", "jobs": 6}]
+}

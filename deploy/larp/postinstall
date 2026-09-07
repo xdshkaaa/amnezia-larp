@@ -1,0 +1,20 @@
+#!/bin/bash
+set -euo pipefail
+app_path=/Applications/LarpmneziaVPN.app
+plist_path=/Library/LaunchDaemons/org.larp.LarpmneziaVPN.plist
+service_group=amnvpn
+if ! dscl . -read "/Groups/$service_group" >/dev/null 2>&1; then
+    next_gid=$(dscl . -list /Groups PrimaryGroupID | awk '{print $2}' | sort -n | awk '$1>=500{g=$1} END{print (g?g+1:501)}')
+    dscl . -create "/Groups/$service_group"
+    dscl . -create "/Groups/$service_group" PrimaryGroupID "$next_gid"
+    dscl . -create "/Groups/$service_group" RealName "VPN Service Group"
+fi
+launchctl bootout system "$plist_path" 2>/dev/null || true
+chown -R root:wheel "$app_path"
+chmod -R go-w "$app_path"
+cp "$app_path/Contents/Resources/org.larp.LarpmneziaVPN.plist" "$plist_path"
+chown root:wheel "$plist_path"
+chmod 644 "$plist_path"
+launchctl bootstrap system "$plist_path"
+launchctl enable system/LarpmneziaVPN-service
+launchctl kickstart -k system/LarpmneziaVPN-service

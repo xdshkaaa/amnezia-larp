@@ -129,6 +129,10 @@ void UpdateController::setUpdateCheckRunning(bool running)
 
 void UpdateController::checkForUpdates()
 {
+    // A branded test client must not install an upstream AmneziaVPN package.
+    if (QCoreApplication::applicationName() == QStringLiteral("LarpmneziaVPN")) {
+        return;
+    }
     if (m_updateCheckRunning || !m_appSettingsRepository) {
         return;
     }

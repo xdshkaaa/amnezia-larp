@@ -248,7 +248,7 @@ install(TARGETS ${PROJECT}
 )
 
 if(APPLE)
-    set(RUNTIME_DEPS_DIR ${CMAKE_INSTALL_BINDIR}/AmneziaVPN.app/Contents/Frameworks)
+    set(RUNTIME_DEPS_DIR ${CMAKE_INSTALL_BINDIR}/${CLIENT_TARGET_NAME}.app/Contents/Frameworks)
 else()
     set(RUNTIME_DEPS_DIR ${CMAKE_INSTALL_BINDIR})
 endif()
@@ -304,8 +304,13 @@ if(OVPN_SCRIPTS)
         "$<TARGET_FILE_DIR:${PROJECT}>"
     )
 
+    if(APPLE)
+        set(OVPN_SCRIPTS_INSTALL_DIR "${CLIENT_TARGET_NAME}.app/Contents/MacOS")
+    else()
+        set(OVPN_SCRIPTS_INSTALL_DIR "${CMAKE_INSTALL_BINDIR}")
+    endif()
     install(FILES ${OVPN_SCRIPTS}
-        DESTINATION ${CMAKE_INSTALL_BINDIR}
+        DESTINATION ${OVPN_SCRIPTS_INSTALL_DIR}
         COMPONENT AmneziaVPN
         PERMISSIONS
             OWNER_READ OWNER_EXECUTE

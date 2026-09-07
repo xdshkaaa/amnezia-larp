@@ -20,6 +20,11 @@ project(${PROJECT} VERSION ${AMNEZIAVPN_VERSION}
         HOMEPAGE_URL "https://amnezia.org/"
 )
 
+option(LARP_BRANDING "Build LarpmneziaVPN test client" OFF)
+if(LARP_BRANDING)
+    add_compile_definitions(IPC_SERVICE_URL="local:LarpmneziaVpnIpcInterface")
+endif()
+
 # trigger conan to kick off `conan install` globally
 find_package(OpenSSL REQUIRED)
 if (PREBUILTS_ONLY)
